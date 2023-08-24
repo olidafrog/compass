@@ -1,0 +1,82 @@
+[
+  {
+    "label": "aspect",
+    "description": "Change the aspect ratio of a generation.",
+    "default value": "1:1",
+    "input type": "select from array",
+    "output command": "--ar",
+    "value range": "1:1,2:3,16:9,21:9,9:16,9:21"
+  },
+  {
+    "label": "chaos",
+    "description": "Change how varied the results will be. Higher values produce more unusual and unexpected generations.",
+    "default value": "0",
+    "input type": "integer",
+    "output command": "-c",
+    "value range": "0–100"
+  },
+  {
+    "label": "quality",
+    "description": "How much rendering quality time you want to spend. Higher values use more GPU minutes; lower values use less.",
+    "default value": "1",
+    "input type": "select from array",
+    "output command": "--q",
+    "value range": ".25,.5,1"
+  },
+  {
+    "label": "repeat",
+    "description": "Create multiple Jobs from a single prompt. --repeat is useful for quickly rerunning a job multiple times.",
+    "default value": "1",
+    "input type": "integer",
+    "output command": "--r",
+    "value range": "1–40"
+  },
+  {
+    "label": "seed",
+    "description": "The Midjourney bot uses a seed number to create a field of visual noise, like television static, as a starting point to generate the initial image grids. Seed numbers are generated randomly for each image but can be specified with the --seed or --sameseed parameter. Using the same seed number and prompt will produce similar ending images.",
+    "default value": "",
+    "input type": "integer",
+    "output command": "--seed",
+    "value range": ""
+  },
+  {
+    "label": "stop",
+    "description": "Use the --stop parameter to finish a Job partway through the process. Stopping a Job at an earlier percentage can create blurrier, less detailed results.",
+    "default value": "100",
+    "input type": "integer",
+    "output command": "--stop",
+    "value range": "10–100"
+  },
+  {
+    "label": "style",
+    "description": "Switch between versions of the Midjourney Model Version 5.1 and 5.2.--style <4a, 4b, or 4c> Switch between versions of the Midjourney Model Version 4.--style <cute, expressive, original, or scenic> Switch between versions of the Niji Model Version 5.",
+    "default value": "5.2",
+    "input type": "select from array",
+    "output command": "--style",
+    "value range": "raw, 4a, 4b, 4c, cute, expressive, original, scenic"
+  },
+  {
+    "label": "stylize",
+    "description": "Parameter influences how strongly Midjourney's default aesthetic style is applied to Jobs.",
+    "default value": "",
+    "input type": "integer",
+    "output command": "--s",
+    "value range": ""
+  },
+  {
+    "label": "tile",
+    "description": "Parameter generates images that can be used as repeating tiles to create seamless patterns.",
+    "default value": "false",
+    "input type": "boolean",
+    "output command": "--tile",
+    "value range": ""
+  },
+  {
+    "label": "Weird",
+    "description": "Explore unusual aesthetics with the experimental --weird parameter.",
+    "default value": "",
+    "input type": "integer",
+    "output command": "--weird",
+    "value range": "0–3000"
+  }
+]
