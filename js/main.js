@@ -1,12 +1,10 @@
-
-
-// Function to load the default template from a JSON file
-function loadDefaultTemplate() {
-  return fetch('js/defaultTemplate.json')
+// Function to load JSON from a given path
+function loadJSON(path) {
+  return fetch(path)
     .then(response => response.json())
     .catch(error => {
-      console.error('Error loading default template:', error);
-      return []; // Return an empty array if the JSON file can't be loaded
+      console.error(`Error loading JSON from ${path}:`, error);
+      return [];
     });
 }
 
@@ -16,22 +14,17 @@ function initializeTokenObject() {
   if (tokenObjectString) {
     return Promise.resolve(JSON.parse(tokenObjectString));
   } else {
-    return loadDefaultTemplate().then(defaultTemplate => {
+    return loadJSON('js/defaultTemplate.json').then(defaultTemplate => {
       localStorage.setItem('tokenObject', JSON.stringify(defaultTemplate));
       return defaultTemplate;
     });
   }
 }
 
-// Check if there's existing data in local storage
-initializeTokenObject().then(tokenObject => {
-  populateUI(tokenObject);
-});
-
 // Function to populate the UI
 function populateUI(tokenObject) {
   var container = document.querySelector('.token-list-container');
-  container.innerHTML = ''; // Clear existing content
+  container.innerHTML = '';
 
   tokenObject.forEach(function(item, index) {
     var tokenContainer = document.createElement('div');
@@ -49,7 +42,6 @@ function populateUI(tokenObject) {
     tokenContainer.innerHTML = content;
     container.appendChild(tokenContainer);
 
-    // Add event listener to update token object and local storage
     tokenContainer.querySelector('.token-value-input').addEventListener('input', function() {
       tokenObject[index].token = this.value;
       localStorage.setItem('tokenObject', JSON.stringify(tokenObject));
@@ -57,30 +49,81 @@ function populateUI(tokenObject) {
   });
 }
 
-// -------------- output functionality --------------
+// Function to initialize the parameters from local storage or a default template
+function initializeParameters() {
+  return loadJSON('./js/parameters.json').then(parameters => {
+    var parametersContainer = document.getElementById('parameters-container');
 
-//Comma separate functionality
+    if (!parametersContainer) {
+      console.error('parameters-container not found in HTML');
+      return;
+    }
+
+    parameters.forEach(function(parameter) {
+      var inputHtml = '';
+      if (parameter['input type'] === 'select from array') {
+        inputHtml = `<select id="${parameter.label}">${parameter['value range']
+          .split(',')
+          .map(optionValue => `<option value="${optionValue}">${optionValue}</option>`)
+          .join('')}</select>`;
+      } else if (parameter['input type'] === 'integer') {
+        inputHtml = `<input type="number" id="${parameter.label}" min="${parameter['value range'].split('–')[0]}" max="${parameter['value range'].split('–')[1]}" value="${parameter['default value']}">`;
+      } else if (parameter['input type'] === 'boolean') {
+        inputHtml = `<input type="checkbox" id="${parameter.label}" ${parameter['default value'] === 'true' ? 'checked' : ''}>`;
+      }
+
+      var containerHtml = `
+        <div id="${parameter.label}-container">
+          <label for="${parameter.label}">${parameter.label.charAt(0).toUpperCase() + parameter.label.slice(1)}</label>
+          <div class="parameter-description">${parameter.description}</div>
+          <div class="value-range">${parameter['value range']}</div>
+          <div class="default-value">${parameter['default value']}</div>
+          ${inputHtml}
+        </div>`;
+
+      parametersContainer.innerHTML += containerHtml;
+    });
+  });
+}
+
+// Include parameters in output
 document.getElementById('generate-btn').addEventListener('click', function() {
   var tokenObjectString = localStorage.getItem('tokenObject');
-  if (tokenObjectString) {
-    var tokenObject = JSON.parse(tokenObjectString);
-    // Filter out empty or blank values
-    var values = tokenObject
-      .map(item => item.token)
-      .filter(token => token && token.trim() !== '')
-      .join(', ');
-    document.getElementById('outputPromptTextBox').value = values;
-  } else {
-    console.error('tokenObject not found in local storage');
-  }
+  var tokenObject = JSON.parse(tokenObjectString);
+  var values = tokenObject
+    .map(item => item.token)
+    .filter(token => token && token.trim() !== '')
+    .join(', ');
+
+  var params = '';
+  loadJSON('./js/parameters.json').then(parameters => {
+    params = parameters
+      .map(param => {
+        var inputElement = document.getElementById(param.label);
+        var value = inputElement.type === 'checkbox' ? inputElement.checked : inputElement.value;
+        if (value.toString() !== param['default value']) {
+          return `${param['output command']} ${value}`;
+        }
+      })
+      .filter(param => param)
+      .join(' ');
+
+    document.getElementById('outputPromptTextBox').value = `${values} ${params}`;
+  });
 });
 
-
-// ------------- Clear local storage button
+// Clear local storage button
 document.getElementById('clear-local').addEventListener('click', function() {
   localStorage.removeItem('tokenObject');
-  // Optionally, you can refresh the UI to reflect the cleared data
+  localStorage.removeItem('parameters');
   initializeTokenObject().then(tokenObject => {
     populateUI(tokenObject);
   });
+  initializeParameters();
 });
+
+// Initialize the UI
+initializeTokenObject().then(tokenObject => {
+  populateUI(tokenObject);
+});
+initializeParameters();
