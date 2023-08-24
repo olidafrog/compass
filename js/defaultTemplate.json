@@ -1,52 +1,52 @@
 [
   {
-    "label": "Atmosphere",
+    "label": "General style",
     "description": "Street style, editorial style, food photography",
     "token": ""
   },
   {
-    "label": "Balloons",
-    "description": "Natural light, studio light, mixed lighting",
+    "label": "Composition",
+    "description": "Off center closeup, medium-full side angle, full body shot, two-shot",
     "token": ""
   },
   {
-    "label": "Dissonance",
-    "description": "Erudite timings",
+    "label": "Medium",
+    "description": "Photo, film still, illustration, sketch, sculpture",
     "token": ""
   },
   {
-    "label": "Rapungo",
-    "description": "Natural light, studio light, mixed lighting",
+    "label": "Film type/Camera",
+    "description": "Kodak Gold, Agfa Vista, Canon EOS 5D, Kodachrome",
     "token": ""
   },
   {
-    "label": "Lighting",
-    "description": "Natural light, studio light, mixed lighting",
+    "label": "Subject description",
+    "description": "a woman walking, a man talking, a dog running, a daisy flower",
     "token": ""
   },
   {
-    "label": "Lighting",
-    "description": "Natural light, studio light, mixed lighting",
+    "label": "Subject styling",
+    "description": "fashion descriptions, subject details, anything that details the subjects' appearance",
     "token": ""
   },
   {
-    "label": "Lighting",
-    "description": "Natural light, studio light, mixed lighting",
-    "token": ""
-  },
-  {
-    "label": "Lighting",
-    "description": "Natural light, studio light, mixed lighting",
+    "label": "Environment",
+    "description": "New York, Central Park, Ancient Egypt, Underwater",
     "token": ""
   },
   {
     "label": "Lighting",
-    "description": "Natural light, studio light, mixed lighting",
+    "description": "Natural light, studio lighting, off-camera flash, overcast",
     "token": ""
   },
   {
-    "label": "Lighting",
-    "description": "Natural light, studio light, mixed lighting",
+    "label": "Atmosphere",
+    "description": "Misty, smoky, steamy, foggy",
+    "token": ""
+  },
+  {
+    "label": "Mood",
+    "description": "Dreamy, elegant, spooky, romantic, luxurious",
     "token": ""
   }
 ]

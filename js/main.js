@@ -109,12 +109,24 @@ function generateParameters() {
     return parameters
       .map(param => {
         var inputElement = document.getElementById(param.label);
-        var value = inputElement.type === 'checkbox' ? inputElement.checked : inputElement.value;
-        if (value.toString() !== param['default value']) {
+        var value;
+        if (inputElement.type === 'checkbox') {
+          value = inputElement.checked.toString();
+        } else {
+          value = inputElement.value;
+        }
+
+        // Only output the parameter if it has been modified from the default value
+        if (value !== param['default value']) {
+          // For boolean parameters, only output the 'output command' value, not 'true' or 'false'
+          if (param['input type'] === 'boolean') {
+            return param['output command'];
+          }
+          // For 'select from an array' and other types, include the value
           return `${param['output command']} ${value}`;
         }
       })
-      .filter(param => param)
+      .filter(param => param) // Remove undefined values
       .join(' ');
   });
 }
@@ -138,6 +150,20 @@ document.getElementById('clear-local').addEventListener('click', function() {
     populateUI(tokenObject);
   });
   initializeParameters(); // This will now clear the existing parameters and append the new ones
+});
+
+// Function to reset parameters to their default values
+function resetParametersToDefault() {
+  // Clear only the parameter-related fields from local storage
+  localStorage.removeItem('parameters');
+
+  // Re-initialize the parameters to reload the default values
+  initializeParameters();
+}
+
+// Attach the reset function to the 'parameter-reset' button
+document.getElementById('parameter-reset').addEventListener('click', function() {
+  resetParametersToDefault();
 });
 
 
