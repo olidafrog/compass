@@ -11,6 +11,7 @@
   --neutral-700: #20212e;
   --neutral-800: #191a23;
   --rounded-med: 8px;
+  --elevation-m: 0 0 rgba(0, 0, 0, .1), 0 1px 2px rgba(0, 0, 0, .1), 0 4px 4px rgba(0, 0, 0, .09), 0 8px 5px rgba(0, 0, 0, .05), 0 14px 6px rgba(0, 0, 0, .01), 0 23px 6px rgba(0, 0, 0, 0);
 }
 
 /*-------------- Refactor this --------------- */
@@ -98,7 +99,7 @@ div.wrapper {
   justify-content: flex-start;
   align-items: flex-start;
   display: flex;
-  box-shadow: 0 0 rgba(0, 0, 0, .1), 0 1px 2px rgba(0, 0, 0, .1), 0 4px 4px rgba(0, 0, 0, .09), 0 8px 5px rgba(0, 0, 0, .05), 0 14px 6px rgba(0, 0, 0, .01), 0 23px 6px rgba(0, 0, 0, 0);
+  box-shadow: var(--elevation-m);
 }
 
 .prompt-container {
@@ -135,17 +136,6 @@ div.wrapper {
   display: flex;
 }
 
-.prompt-output-container {
-  width: 100%;
-  grid-column-gap: 8px;
-  grid-row-gap: 8px;
-  border-radius: 8px;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  padding: 24px;
-  display: flex;
-}
 
 .prompt-active {
   width: 100%;
@@ -173,18 +163,18 @@ div.wrapper {
 }
 
 .output-wrapper {
-  width: 100%;
   grid-row-gap: 8px;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
   display: flex;
+  flex-basis: 33%;
 }
 
-.prompt-output {
+.prompt-output-container {
   width: 100%;
-  grid-column-gap: 0px;
-  grid-row-gap: 0px;
+  grid-column-gap: 8px;
+  grid-row-gap: 8px;
   background-color: #20212e;
   border: 1px solid #2f313d;
   border-radius: 8px;
@@ -192,12 +182,14 @@ div.wrapper {
   justify-content: flex-start;
   align-items: flex-start;
   display: flex;
-  box-shadow: 0 0 rgba(0, 0, 0, .1), 0 1px 2px rgba(0, 0, 0, .1), 0 4px 4px rgba(0, 0, 0, .09), 0 8px 5px rgba(0, 0, 0, .05), 0 14px 6px rgba(0, 0, 0, .01), 0 23px 6px rgba(0, 0, 0, 0);
+  box-shadow: var(--elevation-m);
+  padding: 24px;
 }
 
 #outputPromptTextBox {
+  height: 100%;
   width: 100%;
-  height: 120px;
+  box-sizing: border-box;
   font-size: 16px;
   color: #333;
   border: 1px solid #ccc;
@@ -214,7 +206,7 @@ div.wrapper {
 .button-primary {
   grid-column-gap: 8px;
   grid-row-gap: 8px;
-  background-color: #6d4bf6;
+  background-color: var(--primary-500);
   border-radius: 4px;
   flex: 0 auto;
   justify-content: flex-start;
@@ -222,7 +214,7 @@ div.wrapper {
   padding: 12px 16px;
   text-decoration: none;
   display: flex;
-  box-shadow: 0 0 rgba(0, 0, 0, .1), 0 1px 2px rgba(0, 0, 0, .1), 0 4px 4px rgba(0, 0, 0, .09), 0 8px 5px rgba(0, 0, 0, .05), 0 14px 6px rgba(0, 0, 0, .01), 0 23px 6px rgba(0, 0, 0, 0);
+  box-shadow: var(--elevation-m);
 }
 .button-regular {
   color: #858699;
@@ -243,7 +235,7 @@ div.wrapper {
   justify-content: flex-start;
   align-items: flex-start;
   display: flex;
-  box-shadow: 0 0 rgba(0, 0, 0, .1), 0 1px 2px rgba(0, 0, 0, .1), 0 4px 4px rgba(0, 0, 0, .09), 0 8px 5px rgba(0, 0, 0, .05), 0 14px 6px rgba(0, 0, 0, .01), 0 23px 6px rgba(0, 0, 0, 0);
+  box-shadow: var(--elevation-m);
 }
 
 .token-list-container {
@@ -317,7 +309,7 @@ div.wrapper {
   align-items: center;
   padding: 1em; 
   display: flex;
-  box-shadow: 0 0 rgba(0, 0, 0, .1), 0 1px 2px rgba(0, 0, 0, .1), 0 4px 4px rgba(0, 0, 0, .09), 0 8px 5px rgba(0, 0, 0, .05), 0 14px 6px rgba(0, 0, 0, .01), 0 23px 6px rgba(0, 0, 0, 0);
+  box-shadow: var(--elevation-m);
 }
 
 form.form {
@@ -327,16 +319,18 @@ form.form {
 
 /* ----------- Parameters --------------- */
 
-.parameters-container {
+#parameters-container {
   width: 100%;
   grid-column-gap: 0px;
-  grid-row-gap: 0px;
+  grid-row-gap: 2em;
   background-color: #262736;
   flex-direction: column;
   flex: 1;
   justify-content: flex-start;
   align-items: flex-start;
   display: flex;
+  overflow: auto;
+  padding: 1em;
   overflow: auto;
 }
 
@@ -353,16 +347,7 @@ form.form {
   display: flex;
 }
 
-.parameter-label {
-  color: #858699;
-  flex: 1;
-  font-size: .875rem;
-  font-weight: 500;
-  line-height: 16px;
-}
 
-.parameter-description {
-  color:#fff;
-  opacity: 0.5;
-  font-size: 14px;
+.value-range, .default-value {
+  display: none;
 }

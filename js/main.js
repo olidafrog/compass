@@ -73,10 +73,12 @@ function populateParametersUI(parameters) {
 
     var containerHtml = `
       <div id="${parameter.label}-container">
-        <label for="${parameter.label}">${parameter.label.charAt(0).toUpperCase() + parameter.label.slice(1)}</label>
-        <div class="parameter-description">${parameter.description}</div>
+      <div class="label-wrapper">
+        <label class="token-label" for="${parameter.label}">${parameter.label.charAt(0).toUpperCase() + parameter.label.slice(1)}</label>
+        <div class="token-description">${parameter.description}</div>
         <div class="value-range">${parameter['value range']}</div>
        <div class="default-value">${parameter['default value']}</div>
+       </div>
         ${inputHtml}
       </div>`;
 
