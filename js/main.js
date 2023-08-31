@@ -55,7 +55,7 @@ function populateUI(tokenObject) {
 
 // Function to populate the parameters UI
 function populateParametersUI(parameters) {
-  var parametersContainer = document.getElementById('parameters-container');
+  var parametersContainer = document.getElementById('parameter-list-container');
   parametersContainer.innerHTML = ''; // Clear existing content
 
   parameters.forEach(function(parameter) {
