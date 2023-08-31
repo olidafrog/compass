@@ -11,7 +11,7 @@
     <meta content="width=device-width, initial-scale=1" name="viewport" />
     <meta content="Webflow" name="generator" />
     <link href="css/normalize.css" rel="stylesheet" type="text/css" />
-    <link href="css/compass-0-1.webflow.css" rel="stylesheet" type="text/css" />
+    <link href="css/main.css" rel="stylesheet" type="text/css" />
     <link href="https://fonts.googleapis.com" rel="preconnect" />
     <link
       href="https://fonts.gstatic.com"
@@ -44,34 +44,31 @@
     <div class="wrapper">
       <div class="content-wrapper">
         <div class="tokens-wrapper">
-          <h2>Tokens</h2>
+          <div class="section-header"><h2>Tokens</h2></div>
           <div class="token-list-container">
         <!---tokens will populate here -->
           </div>
         </div>
         <div class="parameters-wrapper">
-         <h2>Parameters</h2>
+          <div class="section-header"><h2>Parameters</h2></div>
           <div id="parameters-container">            
               <!-- Parameter containers will be appended here -->
           </div>
         </div>
         <div class="output-wrapper">
-            <h2>Prompt output</h2>
+            <div class="section-header"><h2>Prompt output</h2></div>
             <div class="prompt-output">
               <div class="prompt-output-container">
-                <textarea id="outputPromptTextBox" class="prompt-output-text">
-Non at pellentesque ac risus, eget sit nunc, Sed interdum posuere ultrices sapien, urna nunc. Volutpat consequat habitant.</textarea
-                >
-                <div class="prompt-parameter-container">
-                  </div>
+                <textarea id="outputPromptTextBox" class="prompt-output-text">Your generated prompt will appear here</textarea>
+                <button id="copyPromptBtn" class="button-primary">Copy</button>
                 </div>
               </div>
         </div>
       </div>
         <div class="footer">
-            <button id="clear-local">Clear Local</button>
-            <button id="parameter-reset">Reset parameters</button>
-            <button id="generate-btn" class="button-bold">Generate</button>
+            <button id="clear-local" class="button-regular">Clear Local</button>
+            <button id="parameter-reset" class="button-regular">Reset parameters</button>
+            <button id="generate-btn" class="button-primary">Generate</button>
         </div>
     </div>
       <script

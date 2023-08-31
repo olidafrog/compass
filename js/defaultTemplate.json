@@ -10,6 +10,11 @@
     "token": ""
   },
   {
+    "label": "Director style",
+    "description": "Quentin tarantino, Wes Anderson",
+    "token": ""
+  },
+  {
     "label": "Medium",
     "description": "Photo, film still, illustration, sketch, sculpture",
     "token": ""

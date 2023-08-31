@@ -76,7 +76,7 @@ function populateParametersUI(parameters) {
         <label for="${parameter.label}">${parameter.label.charAt(0).toUpperCase() + parameter.label.slice(1)}</label>
         <div class="parameter-description">${parameter.description}</div>
         <div class="value-range">${parameter['value range']}</div>
-        <div class="default-value">${parameter['default value']}</div>
+       <div class="default-value">${parameter['default value']}</div>
         ${inputHtml}
       </div>`;
 
@@ -140,6 +140,20 @@ document.getElementById('generate-btn').addEventListener('click', function() {
   });
 });
 
+
+
+// Copy prompt to clipboard button
+document.getElementById('copyPromptBtn').addEventListener('click', function() {
+  var copyText = document.getElementById('outputPromptTextBox').value;
+  
+  navigator.clipboard.writeText(copyText)
+    .then(() => {
+      alert('Copied the text: ' + copyText);
+    })
+    .catch(err => {
+      console.error('Could not copy text: ', err);
+    });
+});
 
 
 // Clear local storage button
