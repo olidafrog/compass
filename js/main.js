@@ -35,8 +35,8 @@ function populateUI(tokenObject) {
     var content = `
       <div class="token-content">
         <form class="form">
-          <div class="label-wrapper"><label class="token-label">${item.label}</label>
-            <div class="token-description">${item.description}</div>
+          <div class="label-wrapper"><label class="text-label">${item.label}</label>
+            <div class="text-subcopy">${item.description}</div>
           </div><input type="text" class="token-value-input" maxlength="256" placeholder="Create a token" value="${item.token}">
         </form>
       </div>`;
@@ -72,10 +72,10 @@ function populateParametersUI(parameters) {
     }
 
     var containerHtml = `
-      <div id="${parameter.label}-container">
+      <div class="parameter" id="${parameter.label}-container">
       <div class="label-wrapper">
-        <label class="token-label" for="${parameter.label}">${parameter.label.charAt(0).toUpperCase() + parameter.label.slice(1)}</label>
-        <div class="token-description">${parameter.description}</div>
+        <label class="text-label" for="${parameter.label}">${parameter.label.charAt(0).toUpperCase() + parameter.label.slice(1)}</label>
+        <div class="text-subcopy">${parameter.description}</div>
         <div class="value-range">${parameter['value range']}</div>
        <div class="default-value">${parameter['default value']}</div>
        </div>
